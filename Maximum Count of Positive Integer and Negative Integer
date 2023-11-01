@@ -1,0 +1,38 @@
+ int countNegative(vector<int>&nums, int low,int high)
+    {
+        int count=0;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[mid]<0)
+            {
+               count+=mid-low+1;
+               low=mid+1;
+            }
+            else high=mid-1;
+        }
+
+        return count;
+    }
+
+        int countPositive(vector<int>&nums, int low,int high)
+    {
+        int count=0;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[mid]>0){
+                count+=high-mid+1;
+                high=mid-1;
+            }
+            else low=mid+1;
+        }
+        return count;
+    } 
+public:
+    int maximumCount(vector<int>& nums) {
+
+        int neg=countNegative(nums,0,nums.size()-1);
+        int pos=countPositive(nums,0,nums.size()-1);
+        return max(neg,pos);
+    }
